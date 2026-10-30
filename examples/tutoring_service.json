@@ -1,0 +1,115 @@
+{
+  "_comment": "SYNTHETIC EXAMPLE — ILLUSTRATIVE FIGURES ONLY, NOT MARKET DATA. Invented numbers for teaching; do not use them as price research.",
+  "name": "Neighbourhood tutoring service",
+  "label": "SYNTHETIC EXAMPLE — ILLUSTRATIVE FIGURES ONLY, NOT MARKET DATA",
+  "currency": "USD",
+  "starting_cash": 5000,
+  "contingency_pct": 15,
+  "one_time_costs": [
+    {
+      "name": "Laptop",
+      "amount": 1100,
+      "category": "equipment"
+    },
+    {
+      "name": "Whiteboard and supplies",
+      "amount": 250,
+      "category": "supplies"
+    },
+    {
+      "name": "Curriculum books",
+      "amount": 300,
+      "category": "supplies"
+    },
+    {
+      "name": "Simple website",
+      "amount": 400,
+      "category": "marketing"
+    },
+    {
+      "name": "Business registration",
+      "amount": 150,
+      "category": "licensing"
+    },
+    {
+      "name": "Background check",
+      "amount": 60,
+      "category": "licensing"
+    }
+  ],
+  "monthly_costs": [
+    {
+      "name": "Online lesson platform",
+      "amount": 45,
+      "category": "software"
+    },
+    {
+      "name": "Library study-room bookings",
+      "amount": 200,
+      "category": "facilities"
+    },
+    {
+      "name": "Liability insurance",
+      "amount": 40,
+      "category": "insurance"
+    },
+    {
+      "name": "Flyers and online ads",
+      "amount": 120,
+      "category": "marketing"
+    },
+    {
+      "name": "Travel to students",
+      "amount": 90,
+      "category": "transport"
+    }
+  ],
+  "_comment_revenue": "One unit = one 1-hour session. fixed_cost_override = 495 monthly costs + 1,000 owner pay, so break-even includes paying yourself.",
+  "revenue": {
+    "unit_price": 45,
+    "variable_cost_per_unit": 6,
+    "monthly_units": 60,
+    "fixed_cost_override": 1495
+  },
+  "scenarios": [
+    {
+      "name": "lean",
+      "description": "Use an existing laptop, free platform tier.",
+      "one_time_factor": 0.7,
+      "monthly_factor": 0.8,
+      "overrides": [
+        {
+          "item": "Laptop",
+          "amount": 0
+        },
+        {
+          "item": "Online lesson platform",
+          "amount": 0
+        }
+      ]
+    },
+    {
+      "name": "standard",
+      "description": "The plan as entered.",
+      "one_time_factor": 1,
+      "monthly_factor": 1
+    },
+    {
+      "name": "premium",
+      "description": "Rented teaching room, higher hourly rate.",
+      "one_time_factor": 1.4,
+      "monthly_factor": 1,
+      "overrides": [
+        {
+          "item": "Library study-room bookings",
+          "amount": 650,
+          "kind": "monthly"
+        }
+      ],
+      "revenue": {
+        "unit_price": 60,
+        "monthly_units": 50
+      }
+    }
+  ]
+}

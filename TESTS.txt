@@ -1,0 +1,37 @@
+Verified test run: 2026-10-30
+Command (from the repository root):
+
+    python3 -m unittest discover -s tests -t . -v
+
+Environment: Python 3.12.3 (stdlib only), Node v24.22.1 (used only by the
+parity and demo smoke tests; without node those tests are reported as skipped).
+
+Result: Ran 139 tests, OK (0 failures, 0 errors, 0 skipped)
+
+Per suite:
+  tests/test_calculations.py   37  totals, contingency 0/10/12.5/100%, runway (finite,
+                                   zero/negative burn, shortfall), break-even (price <=
+                                   variable cost, float noise, zero fixed), rounding/format
+  tests/test_validation.py     32  every error type with exact item-numbered messages,
+                                   warnings for empty lists, NaN/Infinity, no silent drops
+  tests/test_scenarios.py      15  factors, overrides (not scaled), revenue merge, winners,
+                                   ties, shortfall/undefined ranking
+  tests/test_reports.py        14  text, JSON, HTML (self-contained, printable, escaped,
+                                   well-formed), CSV; every sample in every format
+  tests/test_cli.py            13  init/validate/report end to end on every sample and
+                                   fixture, --output, exit codes 0/1/2, real subprocess
+  tests/test_parity.py          8  JS (docs/app.js under Node) vs Python: identical errors,
+                                   warnings, model, analysis, messages and comparison on 3
+                                   samples + 20 valid + 14 invalid fixtures; demo samples
+                                   identical to examples/
+  tests/test_demo.py            9  demo UI booted on a fake DOM: edits, errors, aria-invalid,
+                                   scenario switch, add/remove rows + focus, every sample
+  tests/test_labels.py          6  SYNTHETIC EXAMPLE label on every sample, init, README,
+                                   demo, docs; no market-data claims
+  tests/test_docs.py            5  concepts topics, README worked example, chapter SVG
+                                   well-formed and the crossing dot lies on both lines
+                              ---
+                              139
+
+Mutation check (done by hand while building): swapping the JS rounding to
+Math.round, or changing one word of a JS message, makes test_parity fail.

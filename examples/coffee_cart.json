@@ -1,0 +1,114 @@
+{
+  "_comment": "SYNTHETIC EXAMPLE — ILLUSTRATIVE FIGURES ONLY, NOT MARKET DATA. Invented numbers for teaching; do not use them as price research.",
+  "name": "Mobile coffee cart",
+  "label": "SYNTHETIC EXAMPLE — ILLUSTRATIVE FIGURES ONLY, NOT MARKET DATA",
+  "currency": "USD",
+  "starting_cash": 18000,
+  "contingency_pct": 10,
+  "one_time_costs": [
+    {
+      "name": "Cart and build-out",
+      "amount": 7500,
+      "category": "equipment"
+    },
+    {
+      "name": "Espresso machine and grinder",
+      "amount": 4200,
+      "category": "equipment"
+    },
+    {
+      "name": "POS tablet and card reader",
+      "amount": 350,
+      "category": "equipment"
+    },
+    {
+      "name": "Permits and health inspection",
+      "amount": 650,
+      "category": "licensing"
+    },
+    {
+      "name": "Opening inventory",
+      "amount": 800,
+      "category": "inventory"
+    },
+    {
+      "name": "Branding and signage",
+      "amount": 600,
+      "category": "marketing"
+    }
+  ],
+  "monthly_costs": [
+    {
+      "name": "Commissary kitchen rent",
+      "amount": 450,
+      "category": "facilities"
+    },
+    {
+      "name": "Event and pitch fees",
+      "amount": 300,
+      "category": "facilities"
+    },
+    {
+      "name": "Insurance",
+      "amount": 120,
+      "category": "insurance"
+    },
+    {
+      "name": "POS software",
+      "amount": 60,
+      "category": "software"
+    },
+    {
+      "name": "Phone and data",
+      "amount": 55,
+      "category": "software"
+    },
+    {
+      "name": "Vehicle fuel and upkeep",
+      "amount": 220,
+      "category": "transport"
+    },
+    {
+      "name": "Local marketing",
+      "amount": 150,
+      "category": "marketing"
+    }
+  ],
+  "_comment_revenue": "One unit = one drink. Variable cost = beans, milk, cup, lid.",
+  "revenue": {
+    "unit_price": 4.75,
+    "variable_cost_per_unit": 1.35,
+    "monthly_units": 1200
+  },
+  "scenarios": [
+    {
+      "name": "lean",
+      "description": "Refurbished espresso machine, fewer paid events.",
+      "one_time_factor": 0.8,
+      "monthly_factor": 0.9,
+      "overrides": [
+        {
+          "item": "Espresso machine and grinder",
+          "amount": 2500,
+          "kind": "one_time"
+        }
+      ]
+    },
+    {
+      "name": "standard",
+      "description": "The plan as entered.",
+      "one_time_factor": 1,
+      "monthly_factor": 1
+    },
+    {
+      "name": "premium",
+      "description": "Custom cart, more events, premium-priced drinks.",
+      "one_time_factor": 1.3,
+      "monthly_factor": 1.2,
+      "revenue": {
+        "unit_price": 5.5,
+        "variable_cost_per_unit": 1.6
+      }
+    }
+  ]
+}

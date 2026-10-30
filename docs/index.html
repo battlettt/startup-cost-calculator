@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Startup cost calculator: price an idea before you build it</title>
+<meta name="description" content="Offline startup cost, runway and break-even estimator. Sample figures are synthetic.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#results-heading">Skip to results</a>
+<header class="site">
+  <h1>Startup cost calculator</h1>
+  <p class="lede">Add up what it costs to open, what it costs to stay open, how long your cash lasts,
+    and how many sales it takes to break even. Everything runs in this page; nothing is sent anywhere.</p>
+  <p class="banner" role="note"><strong>SYNTHETIC EXAMPLE — ILLUSTRATIVE FIGURES ONLY, NOT MARKET DATA.</strong>
+    The bundled samples use invented numbers for teaching. Replace them with your own quotes.</p>
+</header>
+
+<main>
+<section class="panel" aria-labelledby="load-heading">
+  <h2 id="load-heading">1. Start from a sample or a blank sheet</h2>
+  <div class="row">
+    <label for="sample-select">Sample business</label>
+    <select id="sample-select"></select>
+    <button type="button" id="load-sample">Load sample</button>
+    <button type="button" id="start-blank" class="secondary">Start blank</button>
+    <button type="button" id="export-json" class="secondary">Download as JSON</button>
+    <label class="file secondary">Open JSON file<input type="file" id="import-json" accept="application/json,.json"></label>
+  </div>
+  <p class="sample-label" id="sample-label" aria-live="polite"></p>
+  <p class="hint">Downloaded files work with the command-line tool: <code>python -m startup_costs report file.json</code>.</p>
+</section>
+
+<section class="panel" aria-labelledby="basics-heading">
+  <h2 id="basics-heading">2. The basics</h2>
+  <div class="grid">
+    <label>Business name <input id="biz-name" type="text"></label>
+    <label>Starting cash <input id="starting-cash" type="text" inputmode="decimal" aria-describedby="cash-help"></label>
+    <label>Contingency buffer (%) <input id="contingency" type="text" inputmode="decimal" aria-describedby="cont-help"></label>
+    <label>Currency
+      <select id="currency">
+        <option>USD</option><option>CAD</option><option>AUD</option><option>NZD</option>
+        <option>GBP</option><option>EUR</option>
+      </select>
+    </label>
+  </div>
+  <p class="hint" id="cash-help">Starting cash is the money you have before spending anything.</p>
+  <p class="hint" id="cont-help">The contingency buffer is added on top of one-time costs for surprises (0–100%).</p>
+</section>
+
+<section class="panel" aria-labelledby="ot-heading">
+  <h2 id="ot-heading">3. One-time costs <small>(paid once, to open)</small></h2>
+  <div class="scroll"><table class="edit">
+    <thead><tr><th scope="col">#</th><th scope="col">Item</th><th scope="col">Amount</th><th scope="col">Category</th><th scope="col"><span class="sr">Actions</span></th></tr></thead>
+    <tbody id="one-time-rows"></tbody>
+  </table></div>
+  <button type="button" id="add-one-time">Add one-time cost</button>
+</section>
+
+<section class="panel" aria-labelledby="mo-heading">
+  <h2 id="mo-heading">4. Monthly costs <small>(paid every month, sales or not)</small></h2>
+  <div class="scroll"><table class="edit">
+    <thead><tr><th scope="col">#</th><th scope="col">Item</th><th scope="col">Per month</th><th scope="col">Category</th><th scope="col"><span class="sr">Actions</span></th></tr></thead>
+    <tbody id="monthly-rows"></tbody>
+  </table></div>
+  <button type="button" id="add-monthly">Add monthly cost</button>
+</section>
+
+<section class="panel" aria-labelledby="rev-heading">
+  <h2 id="rev-heading">5. Sales assumptions <small>(optional, needed for break-even)</small></h2>
+  <label class="check"><input type="checkbox" id="has-revenue"> Include sales assumptions</label>
+  <div class="grid" id="revenue-fields">
+    <label>Price per unit <input id="rev-unit_price" type="text" inputmode="decimal"></label>
+    <label>Variable cost per unit <input id="rev-variable_cost_per_unit" type="text" inputmode="decimal"></label>
+    <label>Assumed units per month <input id="rev-monthly_units" type="text" inputmode="decimal"></label>
+    <label>Fixed-cost override (optional) <input id="rev-fixed_cost_override" type="text" inputmode="decimal" aria-describedby="fco-help"></label>
+  </div>
+  <p class="hint" id="fco-help">Leave the override blank to use your monthly cost total. Use it to include, say, your own pay in break-even.</p>
+</section>
+
+<div id="problems" class="panel problems" role="status" aria-live="polite" hidden></div>
+
+<section id="results" aria-labelledby="results-heading">
+  <h2 id="results-heading" tabindex="-1">Results</h2>
+
+  <fieldset class="panel switcher">
+    <legend>Scenario</legend>
+    <div id="scenario-switcher" class="radios"></div>
+    <p id="scenario-detail" class="hint" aria-live="polite"></p>
+  </fieldset>
+
+  <section class="panel" aria-labelledby="totals-heading">
+    <h3 id="totals-heading">Totals</h3>
+    <dl id="totals" class="stats"></dl>
+  </section>
+
+  <section class="panel" aria-labelledby="runway-heading">
+    <h3 id="runway-heading">Runway</h3>
+    <p id="runway-msg" class="msg"></p>
+    <p id="runway-rev-msg" class="msg"></p>
+    <figure class="viz-root" id="burn-chart"></figure>
+  </section>
+
+  <section class="panel" aria-labelledby="be-heading">
+    <h3 id="be-heading">Break-even</h3>
+    <p id="be-msg" class="msg"></p>
+    <p id="be-months-msg" class="msg"></p>
+    <figure class="viz-root" id="be-chart"></figure>
+    <p class="legend" aria-hidden="true"><span class="key s1"></span> Revenue <span class="key s2"></span> Total cost (fixed + variable)</p>
+  </section>
+
+  <section class="panel" aria-labelledby="cmp-heading">
+    <h3 id="cmp-heading">Scenarios side by side</h3>
+    <div class="scroll">
+    <table class="compare">
+      <thead><tr><th scope="col">Scenario</th><th scope="col" class="num">One-time total</th><th scope="col" class="num">Monthly burn</th>
+        <th scope="col" class="num">Runway (no sales)</th><th scope="col" class="num">Break-even units / month</th><th scope="col" class="num">Months to earn back</th></tr></thead>
+      <tbody id="compare-rows"></tbody>
+    </table>
+    </div>
+    <ul id="winners" class="winners"></ul>
+  </section>
+</section>
+</main>
+
+<footer class="site">
+  <p>Same maths as the Python command-line tool, checked by parity tests. Learn the ideas in
+    <a href="concepts.md">concepts.md</a>. Estimates only: not financial advice, not market data.</p>
+</footer>
+<script src="samples.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

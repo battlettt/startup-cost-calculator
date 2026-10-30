@@ -1,0 +1,108 @@
+{
+  "_comment": "SYNTHETIC EXAMPLE — ILLUSTRATIVE FIGURES ONLY, NOT MARKET DATA. Invented numbers for teaching; do not use them as price research.",
+  "name": "Lawn-care service",
+  "label": "SYNTHETIC EXAMPLE — ILLUSTRATIVE FIGURES ONLY, NOT MARKET DATA",
+  "currency": "USD",
+  "starting_cash": 12000,
+  "contingency_pct": 10,
+  "one_time_costs": [
+    {
+      "name": "Utility trailer",
+      "amount": 2200,
+      "category": "equipment"
+    },
+    {
+      "name": "Commercial mower",
+      "amount": 4800,
+      "category": "equipment"
+    },
+    {
+      "name": "Trimmer, blower and edger",
+      "amount": 1100,
+      "category": "equipment"
+    },
+    {
+      "name": "Safety gear",
+      "amount": 200,
+      "category": "supplies"
+    },
+    {
+      "name": "Business licence and registration",
+      "amount": 300,
+      "category": "licensing"
+    },
+    {
+      "name": "Flyers and yard signs",
+      "amount": 350,
+      "category": "marketing"
+    }
+  ],
+  "monthly_costs": [
+    {
+      "name": "Truck payment",
+      "amount": 420,
+      "category": "transport"
+    },
+    {
+      "name": "Fuel",
+      "amount": 380,
+      "category": "transport"
+    },
+    {
+      "name": "Insurance",
+      "amount": 160,
+      "category": "insurance"
+    },
+    {
+      "name": "Equipment maintenance",
+      "amount": 120,
+      "category": "equipment"
+    },
+    {
+      "name": "Phone and scheduling app",
+      "amount": 70,
+      "category": "software"
+    },
+    {
+      "name": "Advertising",
+      "amount": 100,
+      "category": "marketing"
+    }
+  ],
+  "_comment_revenue": "One unit = one lawn visit. Variable cost = trimmer line, bags, dump fees.",
+  "revenue": {
+    "unit_price": 55,
+    "variable_cost_per_unit": 6,
+    "monthly_units": 80
+  },
+  "_comment_scenarios": "The premium scenario deliberately costs more than the starting cash, to show how a shortfall is reported.",
+  "scenarios": [
+    {
+      "name": "lean",
+      "description": "Used mower, word-of-mouth marketing.",
+      "one_time_factor": 0.75,
+      "monthly_factor": 0.9,
+      "overrides": [
+        {
+          "item": "Advertising",
+          "amount": 20
+        }
+      ]
+    },
+    {
+      "name": "standard",
+      "description": "The plan as entered.",
+      "one_time_factor": 1,
+      "monthly_factor": 1
+    },
+    {
+      "name": "premium",
+      "description": "New zero-turn mower and branded trailer.",
+      "one_time_factor": 1.4,
+      "monthly_factor": 1.15,
+      "revenue": {
+        "unit_price": 65
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "Fixture",
+  "label": "SYNTHETIC EXAMPLE — ILLUSTRATIVE FIGURES ONLY, NOT MARKET DATA",
+  "starting_cash": -1,
+  "contingency_pct": 120,
+  "one_time_costs": [
+    {
+      "name": "Oven",
+      "amount": -3000,
+      "category": "equipment"
+    }
+  ],
+  "monthly_costs": [
+    {
+      "name": "Rent",
+      "amount": -0.5,
+      "category": "facilities"
+    }
+  ],
+  "revenue": {
+    "unit_price": 10,
+    "variable_cost_per_unit": 4,
+    "monthly_units": 200
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "Half cents",
+  "label": "SYNTHETIC EXAMPLE — ILLUSTRATIVE FIGURES ONLY, NOT MARKET DATA",
+  "starting_cash": 100.005,
+  "contingency_pct": 0,
+  "one_time_costs": [
+    {
+      "name": "A",
+      "amount": 2.675,
+      "category": "x"
+    }
+  ],
+  "monthly_costs": [
+    {
+      "name": "B",
+      "amount": 1.005,
+      "category": "x"
+    }
+  ],
+  "revenue": {
+    "unit_price": 3.335,
+    "variable_cost_per_unit": 1.33,
+    "monthly_units": 3
+  },
+  "scenarios": [
+    {
+      "name": "half",
+      "one_time_factor": 0.5,
+      "monthly_factor": 0.5
+    }
+  ]
+}

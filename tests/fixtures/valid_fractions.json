@@ -1,0 +1,65 @@
+{
+  "name": "Fixture",
+  "label": "SYNTHETIC EXAMPLE — ILLUSTRATIVE FIGURES ONLY, NOT MARKET DATA",
+  "starting_cash": 1000.07,
+  "contingency_pct": 12.5,
+  "one_time_costs": [
+    {
+      "name": "A",
+      "amount": 0.1,
+      "category": "x"
+    },
+    {
+      "name": "B",
+      "amount": 0.2,
+      "category": "x"
+    },
+    {
+      "name": "C",
+      "amount": 1.005,
+      "category": "y"
+    },
+    {
+      "name": "D",
+      "amount": 333.335,
+      "category": "y"
+    }
+  ],
+  "monthly_costs": [
+    {
+      "name": "E",
+      "amount": 19.99,
+      "category": "x"
+    },
+    {
+      "name": "F",
+      "amount": 0.015,
+      "category": "z"
+    },
+    {
+      "name": "G",
+      "amount": 7.777,
+      "category": "x"
+    }
+  ],
+  "revenue": {
+    "unit_price": 4.75,
+    "variable_cost_per_unit": 1.35,
+    "monthly_units": 37.5
+  },
+  "scenarios": [
+    {
+      "name": "third",
+      "one_time_factor": 0.3333,
+      "monthly_factor": 1.1
+    },
+    {
+      "name": "odd",
+      "one_time_factor": 1.07,
+      "monthly_factor": 0.93,
+      "revenue": {
+        "unit_price": 4.99
+      }
+    }
+  ]
+}

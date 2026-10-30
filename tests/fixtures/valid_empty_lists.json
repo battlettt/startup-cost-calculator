@@ -1,0 +1,9 @@
+{
+  "name": "Fixture",
+  "label": "SYNTHETIC EXAMPLE — ILLUSTRATIVE FIGURES ONLY, NOT MARKET DATA",
+  "starting_cash": 10000,
+  "contingency_pct": 10,
+  "one_time_costs": [],
+  "monthly_costs": [],
+  "scenarios": []
+}

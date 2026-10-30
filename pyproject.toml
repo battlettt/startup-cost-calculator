@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "startup-cost-calculator"
+version = "1.0.0"
+description = "Offline startup cost, runway and break-even estimator (stdlib only)."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.8"
+dependencies = []
+
+[project.scripts]
+startup-costs = "startup_costs.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
